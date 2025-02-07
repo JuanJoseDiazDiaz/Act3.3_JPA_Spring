@@ -2,6 +2,9 @@ package com.example.demo_api_Concesionario.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Coche {
     @Id
@@ -11,9 +14,8 @@ public class Coche {
     private String marca;
     private String modelo;
 
-    @ManyToOne
-    @JoinColumn(name = "conductor_id")
-    private Conductor conductor;
+    @ManyToMany(mappedBy = "coches", fetch = FetchType.EAGER)
+    private List<Conductor> conductores = new ArrayList<>();
 
     public void setIdCoche(Long idCoche) {
         this.idCoche = idCoche;
@@ -47,11 +49,11 @@ public class Coche {
         this.modelo = modelo;
     }
 
-    public Conductor getConductor() {
-        return conductor;
+    public List<Conductor> getConductores() {
+        return conductores;
     }
 
-    public void setConductor(Conductor conductor) {
-        this.conductor = conductor;
+    public void setConductores(List<Conductor> conductores) {
+        this.conductores = conductores;
     }
 }

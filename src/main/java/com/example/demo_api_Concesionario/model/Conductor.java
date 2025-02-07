@@ -1,11 +1,10 @@
 package com.example.demo_api_Concesionario.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Conductor {
@@ -20,14 +19,17 @@ public class Conductor {
     private String provinciaConductor;
     private int numeroConductor;
     private int anyosCarnetConductor;
-    private Date fechaConductor;
+    private LocalDate fechaConductor;
 
-    @OneToMany(mappedBy = "conductor", cascade = CascadeType.ALL)
-    private List<Coche> coches;
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable(
+            name = "conductor_conduce_coche",
+            joinColumns = @JoinColumn(name = "idConductor"),
+            inverseJoinColumns = @JoinColumn(name = "idCoche")
+    )
+    List<Coche> coches = new ArrayList<>();
 
-    public Conductor() {
-        coches = new ArrayList<>();
-    }
 
     public void setIdConductor(Long id) {
         this.idConductor = id;
@@ -101,11 +103,11 @@ public class Conductor {
         this.anyosCarnetConductor = anyosCarnetConductor;
     }
 
-    public Date getFechaConductor() {
+    public LocalDate getFechaConductor() {
         return fechaConductor;
     }
 
-    public void setFechaConductor(Date fechaConductor) {
+    public void setFechaConductor(LocalDate fechaConductor) {
         this.fechaConductor = fechaConductor;
     }
 
@@ -117,13 +119,5 @@ public class Conductor {
         this.coches = coches;
     }
 
-    public void addCoche(Coche coche){
-        this.coches.add(coche);
-        coche.setConductor(this);
-    }
 
-    public void removeCoche(Coche coche){
-        this.coches.remove(coche);
-        coche.setConductor(null);
-    }
 }
