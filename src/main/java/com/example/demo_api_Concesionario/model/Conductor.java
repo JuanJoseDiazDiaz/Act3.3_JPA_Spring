@@ -25,8 +25,8 @@ public class Conductor {
     @JsonIgnore
     @JoinTable(
             name = "conductor_conduce_coche",
-            joinColumns = @JoinColumn(name = "idConductor"),
-            inverseJoinColumns = @JoinColumn(name = "idCoche")
+            joinColumns = @JoinColumn(name = "id_Conductor"),
+            inverseJoinColumns = @JoinColumn(name = "id_Coche")
     )
     List<Coche> coches = new ArrayList<>();
 

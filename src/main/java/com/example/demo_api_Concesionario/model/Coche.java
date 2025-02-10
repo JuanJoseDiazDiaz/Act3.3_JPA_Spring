@@ -17,6 +17,8 @@ public class Coche {
     @ManyToMany(mappedBy = "coches", fetch = FetchType.EAGER)
     private List<Conductor> conductores = new ArrayList<>();
 
+
+
     public void setIdCoche(Long idCoche) {
         this.idCoche = idCoche;
     }

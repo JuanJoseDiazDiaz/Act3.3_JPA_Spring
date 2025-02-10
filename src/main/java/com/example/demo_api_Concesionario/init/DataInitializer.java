@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -18,6 +20,13 @@ public class DataInitializer implements CommandLineRunner {
     @Autowired
     private ConductorRepositorio conductorRepositorio;
 
+    private final ConductorRepositorio conductorRepository;
+    private final CocheRepository cocheRepository;
+
+    public DataInitializer(ConductorRepositorio conductorRepository, CocheRepository cocheRepository) {
+        this.conductorRepository = conductorRepository;
+        this.cocheRepository = cocheRepository;
+    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -104,7 +113,7 @@ public class DataInitializer implements CommandLineRunner {
         conductor.setProvinciaConductor("Huelva");
         conductor.setNumeroConductor(6772312);
         conductor.setAnyosCarnetConductor(2);
-        conductor.setFechaConductor(LocalDate.of(2021,03, 1));
+        conductor.setFechaConductor(LocalDate.of(2021, 03, 1));
 
         Conductor conductor2 = new Conductor();
         conductor2.setNombreConductor("Sergio");
@@ -115,7 +124,7 @@ public class DataInitializer implements CommandLineRunner {
         conductor2.setProvinciaConductor("Huelva");
         conductor2.setNumeroConductor(6772343);
         conductor2.setAnyosCarnetConductor(5);
-        conductor2.setFechaConductor(LocalDate.of(2020,04, 24));
+        conductor2.setFechaConductor(LocalDate.of(2020, 04, 24));
 
         Conductor conductor3 = new Conductor();
         conductor3.setNombreConductor("José");
@@ -126,7 +135,7 @@ public class DataInitializer implements CommandLineRunner {
         conductor3.setProvinciaConductor("Huelva");
         conductor3.setNumeroConductor(6772367);
         conductor3.setAnyosCarnetConductor(1);
-        conductor3.setFechaConductor(LocalDate.of(2024,02, 14));
+        conductor3.setFechaConductor(LocalDate.of(2024, 02, 14));
 
         Conductor conductor4 = new Conductor();
         conductor4.setNombreConductor("Roberto");
@@ -137,7 +146,7 @@ public class DataInitializer implements CommandLineRunner {
         conductor4.setProvinciaConductor("Huelva");
         conductor4.setNumeroConductor(6772389);
         conductor4.setAnyosCarnetConductor(8);
-        conductor4.setFechaConductor(LocalDate.of(2016,12, 30));
+        conductor4.setFechaConductor(LocalDate.of(2016, 12, 30));
 
         Conductor conductor5 = new Conductor();
         conductor5.setNombreConductor("Jorge");
@@ -148,7 +157,7 @@ public class DataInitializer implements CommandLineRunner {
         conductor5.setProvinciaConductor("Huelva");
         conductor5.setNumeroConductor(6772387);
         conductor5.setAnyosCarnetConductor(10);
-        conductor5.setFechaConductor(LocalDate.of(2015,7, 4));
+        conductor5.setFechaConductor(LocalDate.of(2015, 7, 4));
 
         conductor.getCoches().addAll(List.of(coche1, coche2));
         conductor2.getCoches().addAll(List.of(coche3, coche4));
@@ -170,4 +179,6 @@ public class DataInitializer implements CommandLineRunner {
         conductorRepositorio.saveAll(List.of(conductor, conductor2, conductor3, conductor4, conductor5));
 
     }
+
+
 }
