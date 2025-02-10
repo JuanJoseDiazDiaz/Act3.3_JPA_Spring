@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/conductores")
+@RequestMapping("/coches")
 public class ConductorController {
 
     @Autowired
@@ -21,12 +21,12 @@ public class ConductorController {
     }
 
     @GetMapping("/{idConductor}")
-    public Conductor findConductorById(@RequestParam long id) {
+    public Conductor findConductorById(@PathVariable  long id) {
         return repositorioConductor.getById(id);
     }
 
     @GetMapping("/findInfoConductores")
-    public List<Coche> cochesConductores(@RequestParam long id){
+    public List<Coche> cochesConductores(@PathVariable  long id){
          List<Coche> coches = (List<Coche>) findConductorById(id);
          return coches;
     }
