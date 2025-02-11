@@ -27,9 +27,6 @@ public class Main implements CommandLineRunner {
         this.cocheRepository = cocheRepository;
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
-    }
 
     @Override
     @Transactional
@@ -45,21 +42,21 @@ public class Main implements CommandLineRunner {
                 case 2 -> mostrarCoches();
                 case 3 -> {
                     System.out.print("Ingrese el ID del conductor: ");
-                    Long idConductor = scanner.nextLong();
+                    int idConductor = scanner.nextInt();
                     mostrarCochesPorConductor(idConductor);
                 }
                 case 4 -> {
                     System.out.print("Ingrese el ID del coche: ");
-                    Long idCoche = scanner.nextLong();
+                    int idCoche = scanner.nextInt();
                     mostrarConductorPorCoche(idCoche);
                 }
                 case 5 -> mostrarCochesConductorMayor10Anios();
                 case 6 -> mostrarCochesConductorMenor25Anios();
-                case 7 -> mostrarConductoresJE5Anios();
+//                case 7 -> mostrarConductoresJE5Anios();
                 case 8 -> mostrarConductores3A6Anios();
                 case 9 -> {
                     System.out.print("Ingrese el ID del conductor: ");
-                    Long idConductor = scanner.nextLong();
+                    int idConductor = scanner.nextInt();
                     scanner.nextLine();
                     System.out.print("Nueva calle: ");
                     String calle = scanner.nextLine();
@@ -73,7 +70,7 @@ public class Main implements CommandLineRunner {
                 }
                 case 10 -> {
                     System.out.print("Ingrese el ID del coche a eliminar: ");
-                    Long idCoche = scanner.nextLong();
+                    int idCoche = scanner.nextInt();
                     eliminarCoche(idCoche);
                 }
                 case 0 -> System.out.println("Saliendo...");
@@ -92,8 +89,8 @@ public class Main implements CommandLineRunner {
         coches.forEach(System.out::println);
     }
 
-    private void mostrarCochesPorConductor(Long idConductor) {
-        List<Coche> coches = cocheRepository.findByConductores_Id(idConductor);
+    private void mostrarCochesPorConductor(int idConductor) {
+        List<Coche> coches = cocheRepository.findByConductores_IdConductor(idConductor);
         if (coches.isEmpty()) {
             System.out.println("No se encontraron coches para este conductor.");
         } else {
@@ -101,7 +98,7 @@ public class Main implements CommandLineRunner {
         }
     }
 
-    private void mostrarConductorPorCoche(Long idCoche) {
+    private void mostrarConductorPorCoche(int idCoche) {
         Optional<Coche> coche = cocheRepository.findById(idCoche);
         if (coche.isPresent() && coche.get().getConductores() != null) {
             System.out.println("Conductor: " + coche.get().getConductores());
@@ -111,12 +108,12 @@ public class Main implements CommandLineRunner {
     }
 
     private void mostrarCochesConductorMayor10Anios() {
-        List<Coche> coches = cocheRepository.findByConductores_AnyosCarnetGreaterThan(10);
+        List<Coche> coches = cocheRepository.findByConductores_AnyosCarnetConductorGreaterThan(10);
         coches.forEach(System.out::println);
     }
 
     private void mostrarCochesConductorMenor25Anios() {
-        List<Coche> coches = cocheRepository.findByConductores_EdadLessThan(25);
+        List<Coche> coches = cocheRepository.findByConductores_AnyosCarnetConductorLessThan(35);
         coches.forEach(System.out::println);
     }
 
@@ -131,12 +128,12 @@ public class Main implements CommandLineRunner {
         conductores.forEach(System.out::println);
     }
 
-    private void actualizarDireccionConductor(Long idConductor, String calle, String cp, String localidad, String provincia) {
+    private void actualizarDireccionConductor(int idConductor, String calle, String cp, String localidad, String provincia) {
         conductorRepository.updateDireccionConductor(idConductor, calle, cp, localidad, provincia);
         System.out.println("Dirección actualizada con éxito.");
     }
 
-    private void eliminarCoche(Long idCoche) {
+    private void eliminarCoche(int idCoche) {
         cocheRepository.deleteById(idCoche);
         System.out.println("Coche eliminado con éxito.");
     }

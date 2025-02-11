@@ -21,12 +21,12 @@ public class ConductorController {
     }
 
     @GetMapping("/{idConductor}")
-    public Conductor findConductorById(@PathVariable  long id) {
+    public Conductor findConductorById(@PathVariable  int id) {
         return repositorioConductor.getById(id);
     }
 
     @GetMapping("/findInfoConductores")
-    public List<Coche> cochesConductores(@PathVariable  long id){
+    public List<Coche> cochesConductores(@PathVariable  int id){
          List<Coche> coches = (List<Coche>) findConductorById(id);
          return coches;
     }

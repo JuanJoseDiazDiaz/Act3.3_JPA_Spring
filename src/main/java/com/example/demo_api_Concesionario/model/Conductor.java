@@ -1,5 +1,6 @@
 package com.example.demo_api_Concesionario.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -10,7 +11,7 @@ import java.util.*;
 public class Conductor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idConductor;
+    private int idConductor;
     private String nombreConductor;
     private String apellidoConductor;
     private String calleConductor;
@@ -21,8 +22,8 @@ public class Conductor {
     private int anyosCarnetConductor;
     private LocalDate fechaConductor;
 
-    @ManyToMany
     @JsonIgnore
+    @ManyToMany
     @JoinTable(
             name = "conductor_conduce_coche",
             joinColumns = @JoinColumn(name = "id_Conductor"),
@@ -31,11 +32,11 @@ public class Conductor {
     List<Coche> coches = new ArrayList<>();
 
 
-    public void setIdConductor(Long id) {
+    public void setIdConductor(int id) {
         this.idConductor = id;
     }
 
-    public Long getIdConductor() {
+    public int getIdConductor() {
         return idConductor;
     }
 
@@ -119,5 +120,15 @@ public class Conductor {
         this.coches = coches;
     }
 
-
+    @Override
+    public String toString() {
+        return "Conductor{" +
+                "idConductor=" + idConductor +
+                ", nombre='" + nombreConductor + '\'' +
+                ", apellido='" + apellidoConductor + '\'' +
+                ", anyosCarnet=" + anyosCarnetConductor +
+                ", fechaNacimiento=" + fechaConductor +
+                ", coches=" + coches.stream().map(Coche::getIdCoche).toList() +  // Evitar recursión infinita
+                '}';
+    }
 }

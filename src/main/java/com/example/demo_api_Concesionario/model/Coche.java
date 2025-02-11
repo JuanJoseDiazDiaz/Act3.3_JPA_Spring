@@ -1,5 +1,7 @@
 package com.example.demo_api_Concesionario.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -9,21 +11,20 @@ import java.util.List;
 public class Coche {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCoche;
+    private int idCoche;
     private String matricula;
     private String marca;
     private String modelo;
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "coches", fetch = FetchType.EAGER)
     private List<Conductor> conductores = new ArrayList<>();
 
 
-
-    public void setIdCoche(Long idCoche) {
+    public void setIdCoche(int idCoche) {
         this.idCoche = idCoche;
     }
 
-    public Long getIdCoche() {
+    public int getIdCoche() {
         return idCoche;
     }
 
@@ -58,4 +59,16 @@ public class Coche {
     public void setConductores(List<Conductor> conductores) {
         this.conductores = conductores;
     }
+
+    @Override
+    public String toString() {
+        return "Coche{" +
+                "idCoche=" + idCoche +
+                ", matricula='" + matricula + '\'' +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", conductores=" + conductores.stream().map(Conductor::getIdConductor).toList() +  // Evitar recursión infinita
+                '}';
+    }
+
 }

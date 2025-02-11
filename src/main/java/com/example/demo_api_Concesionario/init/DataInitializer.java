@@ -145,7 +145,7 @@ public class DataInitializer implements CommandLineRunner {
         conductor4.setLocalidadConductor("Isla Cristina");
         conductor4.setProvinciaConductor("Huelva");
         conductor4.setNumeroConductor(6772389);
-        conductor4.setAnyosCarnetConductor(8);
+        conductor4.setAnyosCarnetConductor(20);
         conductor4.setFechaConductor(LocalDate.of(2016, 12, 30));
 
         Conductor conductor5 = new Conductor();
