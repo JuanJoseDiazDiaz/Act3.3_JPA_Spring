@@ -14,13 +14,11 @@ public class Conductor {
     private int idConductor;
     private String nombreConductor;
     private String apellidoConductor;
-    private String calleConductor;
-    private String cpConductor;
-    private String localidadConductor;
-    private String provinciaConductor;
     private int numeroConductor;
     private int anyosCarnetConductor;
     private LocalDate fechaConductor;
+    @Embedded
+    private Direccion direccion;
 
     @JsonIgnore
     @ManyToMany
@@ -56,38 +54,6 @@ public class Conductor {
         this.apellidoConductor = apellidoConductor;
     }
 
-    public String getCalleConductor() {
-        return calleConductor;
-    }
-
-    public void setCalleConductor(String calleConductor) {
-        this.calleConductor = calleConductor;
-    }
-
-    public String getCpConductor() {
-        return cpConductor;
-    }
-
-    public void setCpConductor(String cpConductor) {
-        this.cpConductor = cpConductor;
-    }
-
-    public String getLocalidadConductor() {
-        return localidadConductor;
-    }
-
-    public void setLocalidadConductor(String localidadConductor) {
-        this.localidadConductor = localidadConductor;
-    }
-
-    public String getProvinciaConductor() {
-        return provinciaConductor;
-    }
-
-    public void setProvinciaConductor(String provinciaConductor) {
-        this.provinciaConductor = provinciaConductor;
-    }
-
     public int getNumeroConductor() {
         return numeroConductor;
     }
@@ -118,6 +84,14 @@ public class Conductor {
 
     public void setCoches(List<Coche> coches) {
         this.coches = coches;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.demo_api_Concesionario.init;
 
 import com.example.demo_api_Concesionario.model.Coche;
 import com.example.demo_api_Concesionario.model.Conductor;
+import com.example.demo_api_Concesionario.model.Direccion;
 import com.example.demo_api_Concesionario.repository.CocheRepository;
 import com.example.demo_api_Concesionario.repository.ConductorRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,15 +103,42 @@ public class DataInitializer implements CommandLineRunner {
         repositoryCoche.save(coche9);
         repositoryCoche.save(coche10);
 
+        //todo -> Direccion
+        Direccion direccion1 = new Direccion();
+        direccion1.setCalleConductor("Avenida Carnaval");
+        direccion1.setCpConductor("21410");
+        direccion1.setLocalidadConductor("Isla Cristina");
+        direccion1.setProvinciaConductor("Huelva");
+
+        Direccion direccion2 = new Direccion();
+        direccion2.setCalleConductor("Calle Lepero");
+        direccion2.setCpConductor("21440");
+        direccion2.setLocalidadConductor("Lepe");
+        direccion2.setProvinciaConductor("Huelva");
+
+        Direccion direccion3 = new Direccion();
+        direccion3.setCalleConductor("Calle de la Moda");
+        direccion3.setCpConductor("21400");
+        direccion3.setLocalidadConductor("Ayamonte");
+        direccion3.setProvinciaConductor("Huelva");
+
+        Direccion direccion4 = new Direccion();
+        direccion4.setCalleConductor("Calle España");
+        direccion4.setCpConductor("21410");
+        direccion4.setLocalidadConductor("Isla Cristina");
+        direccion4.setProvinciaConductor("Huelva");
+
+        Direccion direccion5 = new Direccion();
+        direccion5.setCalleConductor("Calle de la Moda");
+        direccion5.setCpConductor("21440");
+        direccion5.setLocalidadConductor("Lepe");
+        direccion5.setProvinciaConductor("Huelva");
 
         // todo -> Conductores
         Conductor conductor = new Conductor();
         conductor.setNombreConductor("Iker");
         conductor.setApellidoConductor("Silva");
-        conductor.setCalleConductor("Avenida Carnaval");
-        conductor.setCpConductor("21410");
-        conductor.setLocalidadConductor("Isla Cristina");
-        conductor.setProvinciaConductor("Huelva");
+        conductor.setDireccion(direccion1);
         conductor.setNumeroConductor(6772312);
         conductor.setAnyosCarnetConductor(2);
         conductor.setFechaConductor(LocalDate.of(2021, 03, 1));
@@ -118,10 +146,7 @@ public class DataInitializer implements CommandLineRunner {
         Conductor conductor2 = new Conductor();
         conductor2.setNombreConductor("Sergio");
         conductor2.setApellidoConductor("Rojas");
-        conductor2.setCalleConductor("Calle Lepero");
-        conductor2.setCpConductor("21440");
-        conductor2.setLocalidadConductor("Lepe");
-        conductor2.setProvinciaConductor("Huelva");
+        conductor2.setDireccion(direccion2);
         conductor2.setNumeroConductor(6772343);
         conductor2.setAnyosCarnetConductor(5);
         conductor2.setFechaConductor(LocalDate.of(2020, 04, 24));
@@ -129,10 +154,7 @@ public class DataInitializer implements CommandLineRunner {
         Conductor conductor3 = new Conductor();
         conductor3.setNombreConductor("José");
         conductor3.setApellidoConductor("Seda");
-        conductor3.setCalleConductor("Calle de la Moda");
-        conductor3.setCpConductor("21400");
-        conductor3.setLocalidadConductor("Ayamonte");
-        conductor3.setProvinciaConductor("Huelva");
+        conductor3.setDireccion(direccion3);
         conductor3.setNumeroConductor(6772367);
         conductor3.setAnyosCarnetConductor(1);
         conductor3.setFechaConductor(LocalDate.of(2024, 02, 14));
@@ -140,10 +162,7 @@ public class DataInitializer implements CommandLineRunner {
         Conductor conductor4 = new Conductor();
         conductor4.setNombreConductor("Roberto");
         conductor4.setApellidoConductor("Rivero");
-        conductor4.setCalleConductor("Calle España");
-        conductor4.setCpConductor("21410");
-        conductor4.setLocalidadConductor("Isla Cristina");
-        conductor4.setProvinciaConductor("Huelva");
+        conductor4.setDireccion(direccion4);
         conductor4.setNumeroConductor(6772389);
         conductor4.setAnyosCarnetConductor(20);
         conductor4.setFechaConductor(LocalDate.of(2016, 12, 30));
@@ -151,10 +170,7 @@ public class DataInitializer implements CommandLineRunner {
         Conductor conductor5 = new Conductor();
         conductor5.setNombreConductor("Jorge");
         conductor5.setApellidoConductor("Gomez");
-        conductor5.setCalleConductor("Calle de la Moda");
-        conductor5.setCpConductor("21440");
-        conductor5.setLocalidadConductor("Lepe");
-        conductor5.setProvinciaConductor("Huelva");
+        conductor5.setDireccion(direccion5);
         conductor5.setNumeroConductor(6772387);
         conductor5.setAnyosCarnetConductor(10);
         conductor5.setFechaConductor(LocalDate.of(2015, 7, 4));

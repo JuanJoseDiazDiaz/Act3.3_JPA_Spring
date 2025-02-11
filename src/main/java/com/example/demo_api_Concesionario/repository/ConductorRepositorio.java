@@ -22,6 +22,6 @@ public interface ConductorRepositorio extends JpaRepository<Conductor, Integer> 
     public  List<Conductor> findByAnyosCarnetConductorBetween(int min, int max);
     // 9. Actualizar dirección de un conductor
     @Modifying
-    @Query("UPDATE Conductor c SET c.calleConductor = :calle, c.cpConductor = :cp, c.localidadConductor = :localidad, c.provinciaConductor = :provincia WHERE c.idConductor = :idConductor")
+    @Query("UPDATE Conductor c SET c.direccion.calleConductor = :calle, c.direccion.cpConductor = :cp, c.direccion.localidadConductor = :localidad, c.direccion.provinciaConductor = :provincia WHERE c.idConductor = :idConductor")
     void updateDireccionConductor(int idConductor, String calle, String cp, String localidad, String provincia);
 }

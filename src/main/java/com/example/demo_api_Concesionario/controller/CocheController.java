@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/conductores")
+@RequestMapping("/coches")
 public class CocheController {
     @Autowired
     private CocheRepository repository;
