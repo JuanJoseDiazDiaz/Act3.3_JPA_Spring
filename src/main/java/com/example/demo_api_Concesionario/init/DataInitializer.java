@@ -153,7 +153,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Conductor conductor3 = new Conductor();
         conductor3.setNombreConductor("José");
-        conductor3.setApellidoConductor("Seda");
+        conductor3.setApellidoConductor("Jerez");
         conductor3.setDireccion(direccion3);
         conductor3.setNumeroConductor(6772367);
         conductor3.setAnyosCarnetConductor(1);

@@ -52,7 +52,7 @@ public class Main implements CommandLineRunner {
                 }
                 case 5 -> mostrarCochesConductorMayor10Anios();
                 case 6 -> mostrarCochesConductorMenor25Anios();
-//                case 7 -> mostrarConductoresJE5Anios();
+                case 7 -> mostrarConductoresJE5Anios();
                 case 8 -> mostrarConductores3A6Anios();
                 case 9 -> {
                     System.out.print("Ingrese el ID del conductor: ");
@@ -73,7 +73,10 @@ public class Main implements CommandLineRunner {
                     int idCoche = scanner.nextInt();
                     eliminarCoche(idCoche);
                 }
-                case 0 -> System.out.println("Saliendo...");
+                case 11 -> {
+                    System.out.println("Saliendo...");
+                    System.exit(0);  // Esto termina la ejecución del programa.
+                }
                 default -> System.out.println("Opción no válida. Intente de nuevo.");
             }
         } while (opcion != 0);
@@ -127,15 +130,21 @@ public class Main implements CommandLineRunner {
         List<Conductor> conductores = conductorRepository.findByAnyosCarnetConductorBetween(3, 6);
         conductores.forEach(System.out::println);
     }
-
-    private void actualizarDireccionConductor(int idConductor, String calle, String cp, String localidad, String provincia) {
+    @Transactional
+    protected void actualizarDireccionConductor(int idConductor, String calle, String cp, String localidad, String provincia) {
         conductorRepository.updateDireccionConductor(idConductor, calle, cp, localidad, provincia);
         System.out.println("Dirección actualizada con éxito.");
     }
+    @Transactional
+    protected void eliminarCoche(int idCoche) {
+        // Primero, desvinculamos a todos los conductores asociados a este coche
+        Coche coche = cocheRepository.findById(idCoche).orElseThrow(() -> new RuntimeException("Coche no encontrado"));
+        for (Conductor conductor : coche.getConductores()) {
+            conductor.getCoches().remove(coche); // Esto elimina la asociación en el conductor
+        }
 
-    private void eliminarCoche(int idCoche) {
-        cocheRepository.deleteById(idCoche);
-        System.out.println("Coche eliminado con éxito.");
+        // Luego, eliminamos el coche
+        cocheRepository.delete(coche);
     }
 
     //Metodo Imprimir menu:
@@ -151,7 +160,7 @@ public class Main implements CommandLineRunner {
         System.out.println("8. Mostrar conductores con entre 3 y 6 años de carnet");
         System.out.println("9. Actualizar dirección de un conductor");
         System.out.println("10. Eliminar un coche");
-        System.out.println("0. Salir");
+        System.out.println("11. Salir");
         System.out.print("Seleccione una opción: ");
     }
 }
